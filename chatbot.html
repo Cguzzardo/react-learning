@@ -15,13 +15,33 @@
     <script type="text/babel">
 
       function ChatInput(){
+        const [inputText, setInputText]= React.useState('');
+
+        function saveInputText(event){
+          setInputText(event.target.value);
+        }
+
+        function sendMessage(){
+          setChatMessages([
+          ...chatMessages,
+          {
+            message: 'test',
+            sender: 'user',
+            id: crypto.randomUUID()
+          }
+        ]);
+        }
+
         return (
           <>
             <input 
               placeholder="Send a message to Chatbot" 
               size='30' 
+              onChange={saveInputText}
             />
-            <button>send </button>
+            <button
+              onClick={sendMessage}
+            >send </button>
           </>
         );
       }
@@ -52,27 +72,55 @@
           </div>
         )
       }
-      
+
+      function ChatMessages(){
+      const [chatMessages, setChatMessages] =  React.useState([
+          {
+            message: 'hello chatbot',
+            sender: 'user',
+            id: 'id1'
+          },
+          {
+            message: 'hello How can i help?',
+            sender: 'robot',
+            id: 'id2'
+          },
+          {
+            message: 'Can you get todays date?',
+            sender: 'user',
+            id: 'id3'
+          },
+          {
+            message: 'Todays date is Feb 22',
+            sender: 'robot',
+            id: 'id4'
+          },
+      ]);
+      //const [chatMessages, setChatMessages] = array;
+      //const chatMessages = array[0];
+      // const setChatMessages = array[1];
+
+
+      return (
+        <>
+          { chatMessages.map((chatMessage)=>{
+            return (
+              <ChatMessage 
+                message= {chatMessage.message}
+                sender= {chatMessage.sender}
+                key={chatMessage.id}
+              />
+            )
+          })}
+        </>  
+      )
+    }
       function App (){
         return(
           <>
             <ChatInput/>
-            <ChatMessage 
-              message="hello chatbot" 
-              sender="user" 
-            />
-            <ChatMessage 
-              message='Hello! How can i help?' 
-              sender='robot'
-            />
-            <ChatMessage 
-              message='Can you get todays date?' 
-              sender ="user"
-            />
-            <ChatMessage 
-              message='Todays date is Feb 22' 
-              sender='robot'
-            />
+            <ChatMessages/>
+           
           </>
         );
       }
