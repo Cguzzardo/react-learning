@@ -17,7 +17,10 @@
       function ChatInput(){
         return (
           <>
-            <input placeholder="Send a message to Chatbot" size='30' />
+            <input 
+              placeholder="Send a message to Chatbot" 
+              size='30' 
+            />
             <button>send </button>
           </>
         );
@@ -26,6 +29,7 @@
       function ChatMessage({message, sender}){
        // const {sender, message} = props
 
+       /*
         if (sender ==='robot'){
           return (
             <div>
@@ -34,30 +38,51 @@
             </div>
           )
         };
+        */
 
         return (
           <div>
+            {sender === 'robot' && (
+              <img src="robot.png" width='50'/> 
+            )}
             {message}
-            <img src="user.png" width='50'/>
+            {sender === 'user' && (
+              <img src="user.png" width='50'/>) }
+            
           </div>
         )
       }
       
-       
-       
-      const app = (
-            <>
-                <ChatInput/>
-                <ChatMessage message="hello chatbot" sender="user" />
-                <ChatMessage message='Hello! How can i help?' sender='robot'/>
-                <ChatMessage message='Can you get todays date?' sender ="user"/>
-                <ChatMessage message='Todays date is Feb 22' sender='robot'/>
-            </>
+      function App (){
+        return(
+          <>
+            <ChatInput/>
+            <ChatMessage 
+              message="hello chatbot" 
+              sender="user" 
+            />
+            <ChatMessage 
+              message='Hello! How can i help?' 
+              sender='robot'
+            />
+            <ChatMessage 
+              message='Can you get todays date?' 
+              sender ="user"
+            />
+            <ChatMessage 
+              message='Todays date is Feb 22' 
+              sender='robot'
+            />
+          </>
         );
+      }
+       
+       
+    
 
 
       const container = document.querySelector('.js-container');
-      const root = ReactDOM.createRoot(container).render(app);
+      const root = ReactDOM.createRoot(container).render(<App />);
     
     </script>
 
