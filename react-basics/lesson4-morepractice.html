@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics lesson 4</title>
+
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      header{
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
+      .formbuttons{
+        padding: 10px 12px;
+        border-radius: 5px;
+        margin-right: 5px;
+        border: none;
+        background-color: rgb(0,123,255);
+        color: white;
+        margin-top: 10px;
+      }
+      .formbuttons:hover{
+        translate: 1px;
+        background-color: blue;
+      }
+      input{
+        padding: 10px 12px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      .showbutton{
+        margin-left: 5px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="js-container">
+      
+    </div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      
+     
+     
+
+      function App (){
+        const [showPassword, setshowPassword] = React.useState(false)
+
+        function handleShowClick(){
+          if (showPassword){
+            setshowPassword(false)
+          }else{
+            setshowPassword(true)
+          }
+        }
+      
+
+        return(
+          <>
+            <header>Hello, welcome to my website</header>
+            <div class="inputs">
+              <input type='text'placeholder='Email'/>
+            </div>
+            <div class="inputs">
+              <input type={showPassword ? "text" :"password"} placeholder='Password'/>
+              <button 
+              class='showbutton'
+              onClick={handleShowClick}
+              >Show</button>
+            </div>
+            <button class='formbuttons'>Login</button>
+            <button class='formbuttons'>Sign Up</button>
+          </>
+
+        )
+    
+      }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+
+
+
+  </body>
+
+</html>
