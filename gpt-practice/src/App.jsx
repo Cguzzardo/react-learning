@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputValue, setinputValue] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  function handleInputChange(event) {
+    setinputValue(event.target.value);
+  }
+
+  function handleAddTodo() {
+    setTodos([...todos, inputValue]);
+    setinputValue("");
+  }
+  function handleDelete(indextodelete){
+    const updatedTodo = todos.filter((_, index)=> index !== indextodelete)  
+    setTodos(updatedTodo)
+  }
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input type="text" value={inputValue} onChange={handleInputChange} />
+        <button onClick={handleAddTodo}>Add</button>
+        <ul>
+          {todos.map((todo, index) => (
+            <li key={index}>{todo} 
+              <button onClick={handleDelete(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
